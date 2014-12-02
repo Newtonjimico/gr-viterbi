@@ -1,0 +1,9 @@
+/home/jagdish/Desktop/gr-viterbi/build/swig/CMakeFiles/_viterbi_swig.dir
+/home/jagdish/Desktop/gr-viterbi/build/swig/CMakeFiles/_viterbi_swig_doc_tag.dir
+/home/jagdish/Desktop/gr-viterbi/build/swig/CMakeFiles/_viterbi_swig_swig_tag.dir
+/home/jagdish/Desktop/gr-viterbi/build/lib/CMakeFiles/gnuradio-viterbi.dir
+/home/jagdish/Desktop/gr-viterbi/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/jagdish/Desktop/gr-viterbi/build/python/CMakeFiles/pygen_python_2ef40.dir
+/home/jagdish/Desktop/gr-viterbi/build/swig/CMakeFiles/pygen_swig_7b1e0.dir
+/home/jagdish/Desktop/gr-viterbi/build/lib/CMakeFiles/test-viterbi.dir
+/home/jagdish/Desktop/gr-viterbi/build/CMakeFiles/uninstall.dir
