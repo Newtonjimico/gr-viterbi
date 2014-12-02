@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<block>
+  <name>convdec</name>
+  <key>viterbi_convdec</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.convdec($N, $M, $G1, $G2)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>Sequence Length</name>
+    <key>N</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Constraint Length</name>
+    <key>M</key>
+    <type>int</type>
+  </param>
+
+
+  <param>
+    <name>GenPolynomial G1</name>
+    <key>G1</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>GenPolynomial G2</name>
+    <key>G2</key>
+    <type>int</type>
+  </param>
+
+
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

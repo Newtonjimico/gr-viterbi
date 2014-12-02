@@ -1,0 +1,20 @@
+<block>
+  <name>channel_dop_cc</name>
+  <key>viterbi_channel_dop_cc</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.channel_dop_cc($tot_bits)</make>
+  <param>
+    <name>Tot_bits</name>
+    <key>tot_bits</key>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>

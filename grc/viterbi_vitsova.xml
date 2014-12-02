@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<block>
+  <name>vitsova</name>
+  <key>viterbi_vitsova</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.vitsova($N, $bt, $pam)</make>
+
+  <param>
+    <name>Sequence Length</name>
+    <key>N</key>
+    <type>int</type>
+  </param>
+  <!-- Not require in future   bt, pam   * type -->
+  <param>
+    <name>BT</name>
+    <key>bt</key>
+	<value>0.3</value>
+    <type>real</type>
+  </param>
+	<param>
+		<name>CIR ACF</name>
+		<key>pam</key>
+		<value>True</value>
+		<type>bool</type>
+		<option>
+			<name>PAM</name>
+			<key>True</key>
+		</option>
+		<option>
+			<name>GMSK</name>
+			<key>False</key>
+		</option>
+</param>
+
+
+
+
+
+
+
+
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type>float</type>
+  </source>
+</block>

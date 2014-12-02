@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<block>
+  <name>framer_bb</name>
+  <key>viterbi_framer_bb</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.framer_bb($nslot,$fcchsize, $schsize, $dssize, $isr)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>Number of DS/frame</name>
+    <key>nslot</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>FCCH size</name>
+    <key>fcchsize</key>
+    <type>int</type>
+  </param>  
+
+<param>
+    <name>SCH size</name>
+    <key>schsize</key>
+    <type>int</type>
+</param>  
+<param>
+    <name>DS size</name>
+    <key>dssize</key>
+    <type>int</type>
+</param>
+
+<param>
+    <name>ISR</name>
+    <key>isr</key>
+    <type>int</type>
+</param>
+
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+   <type>byte</type>
+  </source>
+</block>

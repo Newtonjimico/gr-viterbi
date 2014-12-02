@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<block>
+  <name>bercount_b</name>
+  <key>viterbi_bercount_b</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.bercount_b($file, $append, $ebno, $L)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+	<param>
+		<name>File</name>
+		<key>file</key>
+		<value>"out.dat"</value>
+		<type>file_save</type>
+	</param>
+
+
+
+
+	<param>
+		<name>Append file</name>
+		<key>append</key>
+		<value>False</value>
+		<type>bool</type>
+		<option>
+			<name>Append</name>
+			<key>True</key>
+		</option>
+		<option>
+			<name>Overwrite</name>
+			<key>False</key>
+		</option>
+	</param>
+	<param>
+		<name>EbNo in dB</name>
+		<key>ebno</key>
+		<value>0</value>
+		<type>float</type>
+	</param>
+
+	<param>
+		<name>counts</name>
+		<key>L</key>
+		<value>1000000</value>
+		<type>int</type>
+	</param>
+
+
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <sink>
+    <name>in1</name>
+    <type>byte</type>
+  </sink>
+
+</block>

@@ -1,0 +1,96 @@
+/* -*- c++ -*- */
+/* 
+ * Copyright 2014 <+YOU OR YOUR COMPANY+>.
+ * 
+ * This is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3, or (at your option)
+ * any later version.
+ * 
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this software; see the file COPYING.  If not, write to
+ * the Free Software Foundation, Inc., 51 Franklin Street,
+ * Boston, MA 02110-1301, USA.
+ */
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#include <gnuradio/io_signature.h>
+#include "framer_bb_impl.h"
+
+namespace gr {
+  namespace viterbi {
+
+    framer_bb::sptr
+    framer_bb::make(int nslot,int fcchsize, int schsize, int dssize, int isr)
+    {
+      return gnuradio::get_initial_sptr
+        (new framer_bb_impl(nslot, fcchsize, schsize,dssize, isr));
+    }
+
+    /*
+     * The private constructor
+     */
+    framer_bb_impl::framer_bb_impl(int nslot,int fcchsize, int schsize, int dssize, int isr)
+      : gr::block("framer_bb",
+              gr::io_signature::make(1,1, sizeof(char)),
+              gr::io_signature::make(1,1, sizeof(char))), d_nslot(nslot),d_fcchsize(fcchsize), d_schsize(schsize),d_dssize(dssize), d_datapframe((dssize-2)*nslot), d_fcount(isr)
+    {
+	initialize();  // total number of bits in a frame
+	set_output_multiple(d_framesize);
+}
+
+    /*
+     * Our virtual destructor.
+     */
+    framer_bb_impl::~framer_bb_impl()
+    {
+    }
+
+    void
+    framer_bb_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+    {
+        ninput_items_required[0] = noutput_items/d_framesize*d_datapframe;
+    }
+
+    int
+    framer_bb_impl::general_work (int noutput_items,
+                       gr_vector_int &ninput_items,
+                       gr_vector_const_void_star &input_items,
+                       gr_vector_void_star &output_items)
+    {
+        const char *in = (const char *) input_items[0];
+        char *out = (char *) output_items[0];
+	int nframes=noutput_items/d_framesize;
+	int nframesmone=nframes-1;
+	char sflag=0;
+	static int i_tframe=d_fcount;
+	
+	for(int j=0;j<nframesmone;j++){
+			if(i_tframe==d_fcount){ 
+			i_tframe=0;
+			insert_sframe(&out[j*d_framesize+sflag*d_sframesize]);
+			sflag++;
+			}
+			fill_fcch(&out[j*d_framesize+sflag*d_sframesize]);
+			fill_sch(&out[j*d_framesize+d_fcchsize+sflag*d_sframesize]);  //  FCCH size
+			fill_data(&in[j*d_datapframe],&out[j*d_framesize+
+					d_fcchsize+d_schsize+sflag*d_sframesize]);
+			i_tframe++; // Make sure per work function call no. of s-frames inserted should not exceed floor(d_framesize/d_sframesize)
+			
+		}
+	//std::cout<<"Framer consumed:"<<nframes*d_datapframe<<" nout:"<<noutput_items<<std::endl;
+        consume_each (nframesmone*d_datapframe);
+        return noutput_items-d_framesize+sflag*d_sframesize;
+    }
+
+  } /* namespace viterbi */
+} /* namespace gr */
+

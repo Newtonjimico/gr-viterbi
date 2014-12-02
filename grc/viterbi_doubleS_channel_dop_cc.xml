@@ -1,0 +1,20 @@
+<block>
+  <name>doubleS channel dop cc</name>
+  <key>viterbi_doubleS_channel_dop_cc</key>
+  <category>viterbi</category>
+  <import>import viterbi</import>
+  <make>viterbi.doubleS_channel_dop_cc($tot_bits_per_pass)</make>
+  <param>
+    <name>Total bits per pass</name>
+    <key>tot_bits_per_pass</key>
+    <type>raw</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>
